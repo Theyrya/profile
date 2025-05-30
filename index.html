@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="1.css">
+  <title>Interactive Landing Page</title>
+  
+</head>
+<body>
+
+<header id="main-header">
+  <nav>
+    <a href="#home" class="logo">MySite</a>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="stopwatch.html">Stopwatch</a></li>
+      <li><a href="tictactoe.html">Tic Tac Toe</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="weather.html">Weather</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Welcome to My Interactive Landing Page</h1>
+    <p>Explore our features including a stopwatch, tic tac toe game, and user profile</p>
+    <div>
+      <a href="#about" class="btn">Learn More</a>
+      <a href="profile.html" class="btn">View Profile</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <h2>About This Project</h2>
+  <p>This responsive landing page showcases interactive elements including a navigation bar that changes color on scroll and has hover effects. The page links to three additional features:</p>
+  <ul style="margin: 20px 0 20px 40px;">
+    <li><strong>Stopwatch:</strong> A functional timer application</li>
+    <li><strong>Tic Tac Toe:</strong> The classic game you can play in your browser</li>
+    <li><strong>Profile:</strong> A user profile page with customizable options</li>
+    <li><strong>Weather:</strong> A weather application that provides real-time weather updates</li>
+  </ul>  
+  <p>All pages feature the same consistent navigation menu that remains fixed at the top of the screen.</p>
+</section>
+
+<section id="features">
+  <h2>Key Features</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
+    <div style="background: #f9f9f9; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+      <h3 style="color: #4b6cb7; margin-bottom: 15px;">Interactive Navigation</h3>
+      <p>Navigation bar changes color on scroll and has animated hover effects for better user experience.</p>
+    </div>
+    <div style="background: #f9f9f9; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+      <h3 style="color: #4b6cb7; margin-bottom: 15px;">Responsive Design</h3>
+      <p>Works perfectly on all devices from mobile phones to desktop computers.</p>
+    </div>
+    <div style="background: #f9f9f9; padding: 25px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+      <h3 style="color: #4b6cb7; margin-bottom: 15px;">Additional Pages</h3>
+      <p>Includes links to functional stopwatch, tic tac toe game, and profile pages.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Get In Touch</h2>
+  <p>Have questions or suggestions? We'd love to hear from you!</p>
+  <p style="margin-top: 20px;">Email: <a href="mailto:contact@example.com" style="color: #4b6cb7; text-decoration: none;">contact@example.com</a></p>
+</section>
+
+<script src="1.js">
+  // Navbar scroll effect
+  window.addEventListener('scroll', function() {
+    const header = document.getElementById('main-header');
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+
+      // Update active link
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.classList.remove('active');
+      });
+      this.classList.add('active');
+    });
+  });
+
+  // Set active link based on current section
+  window.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (pageYOffset >= sectionTop - 300) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
